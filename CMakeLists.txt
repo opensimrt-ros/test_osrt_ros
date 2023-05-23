@@ -20,5 +20,6 @@ if(CATKIN_ENABLE_TESTING)
   add_rostest(test/ik_bare_2392.test)
   add_rostest(test/id_agfr.test)
   add_rostest(test/id_cgfr.test)
-
+  add_rostest(test/lower_ik.test)
+  add_rostest(test/upper_ik.test)
 endif()

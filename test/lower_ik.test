@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <launch>
-	<include file="$(find osrt_ros)/launch/ik_bare_1992.launch" >
-		<arg name="async_run" value="true"/>
-	<!-- arg name="filename" value="/catkin_ws/Data/ruoli/ViconData/Ruoli/Moticon_insole/RealTimekIDS2/walking01_header_corrected.txt"/ -->
+	<node pkg="tf" type="static_transform_publisher" name="dummy_broadcaster" args="1 0 0 0 0 0 1 map dummy_imu 100" />
+	<include file="$(find osrt_ros)/launch/lower_body_tfs_pelvis.launch" >
+		<arg name="name" value="dummy_imu"/>
+		<arg name="freq" value="100"/>
+
 	</include>
+	<include file="$(find osrt_ros)/launch/ik_lowerbody_inverted_pelvis.launch" />
+
 	<test test-name="pubtest" pkg="rostest" type="publishtest">
                  <rosparam>
                  topics:
@@ -12,6 +16,5 @@
                  timeout: 10
                  </rosparam>
 	</test>
-	<!-- node pkg="moticon_insoles" type="mynode" name="mynode" / -->
-	<node name="commander" pkg="test_osrt_ros" type="commander_node.py" />
+	<!-- node name="commander" pkg="test_osrt_ros" type="commander_node.py" / -->
 </launch>
