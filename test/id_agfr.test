@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+	<include file="$(find osrt_ros)/launch/ik_bare_1992.launch" >
+		<arg name="async_run" value="true"/>
+	<!-- arg name="filename" value="/catkin_ws/Data/ruoli/ViconData/Ruoli/Moticon_insole/RealTimekIDS2/walking01_header_corrected.txt"/ -->
+	</include>
+	<include file="$(find osrt_ros)/launch/id.launch"/>
+	<include file="$(find osrt_ros)/launch/agrfm_as_grf.launch">
+		
+		<arg name="model_file" 	default="/srv/data/gait1992/residual_reduction_algorithm/model_adjusted.osim" />
+	</include>
+
+	<test test-name="pubtest" pkg="rostest" type="publishtest">
+                 <rosparam>
+                 topics:
+                 - name: /ik/output
+                 - name: /grf_node/output
+                 - name: /id_node/output
+                 - name: /ik/output_filtered
+                 timeout: 20
+                 </rosparam>
+	</test>
+	<!-- node pkg="moticon_insoles" type="mynode" name="mynode" / -->
+	<node name="commander" pkg="test_osrt_ros" type="commander_node.py" />
+</launch>

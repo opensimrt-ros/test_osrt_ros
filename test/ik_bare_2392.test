@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+	<include file="$(find osrt_ros)/launch/ik_bare_2392.launch" >
+		<arg name="async_run" value="true"/>
+		<!-- arg name="filename" value="/catkin_ws/Data/ruoli/ViconData/Ruoli/Moticon_insole/RealTimekIDS2/walking01_header_corrected.txt"/ -->
+	</include>
+	<test test-name="pubtest" pkg="rostest" type="publishtest">
+                 <rosparam>
+                 topics:
+                 - name: /ik/output
+                 - name: /ik/output_filtered
+                 timeout: 10
+                 </rosparam>
+	</test>
+	<!-- node pkg="moticon_insoles" type="mynode" name="mynode" / -->
+	<node name="commander" pkg="test_osrt_ros" type="commander_node.py" />
+</launch>
