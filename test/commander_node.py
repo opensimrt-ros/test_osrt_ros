@@ -10,8 +10,10 @@ rospy.logwarn_once(stream.read())
 stream = os.popen("rosservice list")
 rospy.logwarn_once(stream.read())
 
-read_labels = rospy.ServiceProxy("/ik/outlabels", LabelsSrv)
-start_ik_srv = rospy.ServiceProxy("/inverse_kinematics_from_file/start", Empty)
+#rospy.logwarn_once("I am still not satisfited with this naming convention.")
+
+read_labels = rospy.ServiceProxy("/ik/out_labels", LabelsSrv)
+start_ik_srv = rospy.ServiceProxy("/ik/inverse_kinematics_from_file/start", Empty)
 
 rospy.sleep(3)
 read_labels()

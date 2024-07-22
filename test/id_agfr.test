@@ -14,11 +14,11 @@
                  <rosparam>
                  topics:
                  - name: /ik/output
+                 - name: /ik/output_filtered
                  - name: /grf_node/right
                  - name: /grf_node/left
                  - name: /grf_node/output
                  - name: /id_node/output
-                 - name: /ik/output_filtered
                  timeout: 20
                  </rosparam>
 	</test>
